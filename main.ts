@@ -1,5 +1,6 @@
-// Node 22, standard library only. Copy the rendered asset without changing bytes.
-// Render news.html separately as described in BUILD.md before running this entry.
+// Node 22, standard library only.
+// Read entry.png beside this module and write its bytes unchanged to
+// $MAKEFUN_OUTPUT_DIR/entry.png, or /output/entry.png when the variable is unset.
 // Local check: mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
 import { copyFileSync, mkdirSync } from 'node:fs';

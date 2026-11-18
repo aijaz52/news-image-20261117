@@ -5,130 +5,211 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The World in One Frame — 17 November 2026</title>
   <style>
-    :root { color-scheme: dark; --navy: #101d2d; --cream: #f5f0e5; --muted: #c8cbd0; --amber: #f1ba62; --rule: #49525d; }
+    :root {
+      color-scheme: dark;
+      --navy: #0d1b2a;
+      --cream: #f8f4e9;
+      --amber: #f4a825;
+      --panel: #14263a;
+      --rule: #405267;
+    }
     * { box-sizing: border-box; }
-    html, body { margin: 0; width: 1024px; height: 1024px; }
-    body { background: var(--navy); color: var(--cream); font-family: Arial, sans-serif; }
-    .page { width: 1024px; height: 1024px; padding: 32px 40px 24px; display: flex; flex-direction: column; }
-    .edition { display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--cream); font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
-    h1 { margin: 16px 0 10px; font-family: Georgia, serif; font-weight: normal; font-size: 61px; line-height: 1.04; letter-spacing: -2.5px; }
-    h1 span { display: block; }
-    .subtitle { margin: 0; padding: 0 0 18px; font-size: 16px; line-height: 22px; border-bottom: 4px double var(--cream); }
-    .stories { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); margin-top: 8px; }
-    .story { padding: 18px 24px 15px 0; min-width: 0; border-bottom: 1px solid var(--rule); }
-    .story:nth-child(even) { padding-left: 24px; padding-right: 0; border-left: 1px solid var(--rule); }
-    .story:nth-last-child(-n+2) { border-bottom: 0; }
-    .region { margin: 0 0 12px; color: var(--amber); font-size: 11px; line-height: 14px; font-weight: bold; letter-spacing: 1.6px; }
-    .story-top { display: flex; align-items: center; gap: 16px; min-height: 70px; margin-bottom: 12px; }
-    .icon { flex: 0 0 72px; width: 72px; height: 72px; color: var(--cream); }
-    h2 { margin: 0; font-family: Georgia, serif; font-size: 27px; line-height: 1.08; font-weight: bold; letter-spacing: -.6px; text-wrap: balance; }
-    .caption { margin: 0 0 7px; font-size: 14px; line-height: 19px; font-weight: bold; white-space: nowrap; }
-    .detail { margin: 0; color: var(--muted); font-size: 14px; line-height: 19px; }
-    footer { display: flex; justify-content: space-between; align-items: center; border-top: 4px double var(--cream); padding-top: 11px; margin-top: 4px; font-size: 10px; line-height: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
-    footer strong { font-size: 12px; letter-spacing: 0; text-transform: none; }
+    body { margin: 0; background: var(--navy); color: var(--cream); font-family: Arial, sans-serif; }
+    .page {
+      width: 1024px;
+      height: 1024px;
+      margin-inline: auto;
+      padding: 27px 36px 22px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 18px;
+    }
+    .edition {
+      margin: 0;
+      padding-top: 9px;
+      border-top: 3px solid var(--amber);
+      font-size: 15px;
+      line-height: 18px;
+      font-weight: bold;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 7px 0 15px;
+      font-family: Georgia, serif;
+      font-size: 94px;
+      line-height: .94;
+      letter-spacing: -.045em;
+    }
+    h1 strong { color: var(--amber); }
+    .summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0;
+      padding: 11px 17px;
+      background: var(--amber);
+      color: var(--navy);
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .summary strong {
+      padding-right: 13px;
+      border-right: 1px solid var(--navy);
+      font-size: 13px;
+      letter-spacing: .06em;
+    }
+    .stories {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .story {
+      min-width: 0;
+      padding: 12px 18px;
+      border: 1px solid var(--rule);
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .story-labels {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 8px;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: bold;
+      letter-spacing: .08em;
+    }
+    .number {
+      min-width: 23px;
+      border: 1px solid var(--amber);
+      text-align: center;
+      color: var(--amber);
+      letter-spacing: 0;
+    }
+    .topic { margin-left: auto; color: var(--amber); }
+    .story-top { display: flex; align-items: center; gap: 12px; min-height: 72px; margin-bottom: 7px; }
+    .icon {
+      flex: 0 0 66px;
+      width: 66px;
+      height: 66px;
+      color: var(--amber);
+      stroke: currentColor;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    h2 {
+      min-width: 0;
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -.025em;
+      text-wrap: balance;
+    }
+    .caption { margin: 0; font-size: 18px; line-height: 22px; }
+    footer {
+      margin: 0;
+      padding-top: 10px;
+      border-top: 1px solid var(--amber);
+      text-align: center;
+      font-size: 17px;
+      line-height: 20px;
+      font-weight: bold;
+    }
     @media print { @page { size: 1024px 1024px; margin: 0; } body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
   </style>
 </head>
 <body>
   <main class="page">
     <header>
-      <div class="edition"><span>Daily world briefing</span><span>Six stories · One edition</span></div>
-      <h1><span>TUESDAY 17</span><span>NOVEMBER 2026</span></h1>
-      <p class="subtitle">The World in One Frame - make.fun picture of the day</p>
+      <p class="edition">Daily world briefing</p>
+      <h1><time datetime="2026-11-17">TUESDAY <strong>17</strong><br>
+        NOVEMBER 2026</time></h1>
+      <p class="summary"><strong>DAY SUMMARY</strong><span>Ukraine drone war escalates · Iran strikes Bahrain again · FAA freezes upgrades · Nvidia beats and raises</span></p>
     </header>
 
     <section class="stories" aria-label="Six world news stories">
       <article class="story">
-        <p class="region">EUROPE/WAR</p>
+        <p class="story-labels"><span class="number">1</span><span>EUROPE</span><span class="topic">WAR</span></p>
         <div class="story-top">
           <svg class="icon" viewBox="0 0 80 80" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 60h64M17 60V46h12v14m9 0V38h13v22m7 0V29h10v31" stroke="currentColor" stroke-width="3"/>
-            <path d="m15 18 22 5 21-9-5 12 13 7-3 5-18-5-13 8-5-3 7-10-20-5Z" fill="currentColor"/>
-            <path d="m7 34 9-3m-5 11 11-4" stroke="currentColor" stroke-width="2"/>
+            <path d="M11 28h17m24 0h17M19 28v12h12m30-12v12H49"/>
+            <rect x="31" y="33" width="18" height="17" rx="4"/>
+            <path d="M34 50v8h12v-8M20 59l-5 5m45-5 5 5"/>
           </svg>
-          <h2>Ukraine's deep strikes; allies split</h2>
+          <h2>Ukraine hits Russia<br>with drones</h2>
         </div>
-        <p class="caption">Kyiv's long-range drones hit Russian targets.</p>
-        <p class="detail">Washington urges restraint; Berlin's Pistorius calls the US warning “quite a stupid thing”; London backs Ukraine.</p>
+        <p class="caption">Kyiv’s long-range strikes split allies. The US urges restraint. Germany and the UK back Kyiv.</p>
       </article>
 
       <article class="story">
-        <p class="region">MIDDLE EAST</p>
+        <p class="story-labels"><span class="number">2</span><span>MIDDLE EAST</span><span class="topic">STRIKES</span></p>
         <div class="story-top">
           <svg class="icon" viewBox="0 0 80 80" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 62c6-5 10 5 16 0s10 5 16 0 10 5 16 0 10 5 16 0M8 71c6-5 10 5 16 0s10 5 16 0 10 5 16 0 10 5 16 0" stroke="currentColor" stroke-width="2.5"/>
-            <path d="m18 47 7 10h34l8-10H18Z" fill="currentColor"/>
-            <path d="M35 46V31h14v15M42 31V20m0 4h13" stroke="currentColor" stroke-width="3"/>
-            <path d="m14 9 14 6-8 10-6-16Zm9 15 8 8m-13-3 8 8" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+            <path d="m13 50 9 12h36l9-12H13Zm17 0V36h21v14m-11-14V25h12"/>
+            <path d="M8 70q8-6 16 0 8 6 16 0t16 0 16 0M13 14l11 11m2-14 7 7"/>
           </svg>
           <h2>Iran strikes Bahrain again</h2>
         </div>
-        <p class="caption">Iran launches a third round of missile strikes.</p>
-        <p class="detail">The strikes target Bahrain, host of the US Navy's 5th Fleet.</p>
+        <p class="caption">Iran launches a third round of missiles at Bahrain, home to the US Navy’s Fifth Fleet.</p>
       </article>
 
       <article class="story">
-        <p class="region">US/TECH</p>
+        <p class="story-labels"><span class="number">3</span><span>UNITED STATES</span><span class="topic">AVIATION</span></p>
         <div class="story-top">
           <svg class="icon" viewBox="0 0 80 80" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="40" width="60" height="27" rx="3" stroke="currentColor" stroke-width="3"/>
-            <path d="M19 40V27m42 13V27M22 53h4m7 0h4m7 0h4" stroke="currentColor" stroke-width="3"/>
-            <path d="m37 6 6 0v10l20 11v5l-20-6v8l5 4H32l5-4v-8l-20 6v-5l20-11V6Z" fill="currentColor"/>
-            <path d="M56 49v10m6-10v10" stroke="currentColor" stroke-width="3"/>
+            <path d="M40 9v40m0-28L17 35m23-14 23 14M40 44l-10 8m10-8 10 8" stroke-width="6"/>
+            <path d="M16 66h48m-29-6v12m10-12v12"/>
           </svg>
-          <h2>FAA halts upgrades after ground stop</h2>
+          <h2>FAA freezes<br>router upgrades</h2>
         </div>
-        <p class="caption">New router installs are paused after a ground stop.</p>
-        <p class="detail">The FAA's pause follows a nationwide ground stop amid a week of major tech outages.</p>
+        <p class="caption">The FAA pauses new installations after a nationwide ground stop during a week of tech outages.</p>
       </article>
 
       <article class="story">
-        <p class="region">MARKETS</p>
+        <p class="story-labels"><span class="number">4</span><span>UNITED STATES</span><span class="topic">MARKETS</span></p>
         <div class="story-top">
           <svg class="icon" viewBox="0 0 80 80" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="15" y="20" width="40" height="40" rx="3" stroke="currentColor" stroke-width="3"/>
-            <path d="M24 11v9m11-9v9m11-9v9M24 60v9m11-9v9m11-9v9M6 29h9m-9 11h9M6 51h9m40-22h9m-9 11h9" stroke="currentColor" stroke-width="3"/>
-            <path d="M25 47V32h20" stroke="currentColor" stroke-width="3"/>
-            <path d="m33 51 13-13 9 8 16-21m-13 0h13v13" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="15" y="15" width="50" height="50" rx="5"/>
+            <path d="M28 8v7m24-7v7M28 65v7m24-7v7M8 28h7m-7 24h7m50-24h7m-7 24h7M25 50l11-12 9 6 10-14m-9 0h9v9"/>
           </svg>
-          <h2>Nvidia lifts guidance, stock jumps</h2>
+          <h2>Nvidia beats and raises</h2>
         </div>
-        <p class="caption">Nvidia posts a Q3 beat and raises guidance.</p>
-        <p class="detail">Shares jump following the chipmaker's quarterly results.</p>
+        <p class="caption">Shares jump after the chipmaker beats third-quarter earnings forecasts and raises its outlook.</p>
       </article>
 
       <article class="story">
-        <p class="region">EUROPE/POLITICS</p>
+        <p class="story-labels"><span class="number">5</span><span>EUROPE</span><span class="topic">DIPLOMACY</span></p>
         <div class="story-top">
           <svg class="icon" viewBox="0 0 80 80" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="9" y="15" width="33" height="49" rx="3" stroke="currentColor" stroke-width="3"/>
-            <circle cx="25" cy="33" r="9" stroke="currentColor" stroke-width="2"/>
-            <path d="M16 33h18m-9-9c-5 6-5 12 0 18 5-6 5-12 0-18ZM18 51h15M47 28h23m-7-7 7 7-7 7M71 51H48m7-7-7 7 7 7" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <rect x="10" y="15" width="35" height="50" rx="4"/>
+            <circle cx="27.5" cy="34" r="9"/>
+            <path d="M19 34h17M20 53h15m17-23h18l-6-6m6 6-6 6m6 15H52l6-6m-6 6 6 6"/>
           </svg>
-          <h2>UK-EU youth mobility deal</h2>
+          <h2>UK and EU near<br>youth mobility deal</h2>
         </div>
-        <p class="caption">A summit is set to seal a scheme in principle.</p>
-        <p class="detail">The planned UK-EU agreement concerns youth mobility.</p>
+        <p class="caption">A summit is expected to produce an agreement in principle on a youth mobility scheme.</p>
       </article>
 
       <article class="story">
-        <p class="region">AMERICAS</p>
+        <p class="story-labels"><span class="number">6</span><span>SOUTH AMERICA</span><span class="topic">VATICAN</span></p>
         <div class="story-top">
           <svg class="icon" viewBox="0 0 80 80" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="m6 66 20-31 11 16 10-13 27 28H6Z" fill="currentColor" opacity=".25"/>
-            <path d="m6 66 20-31 11 16 10-13 27 28H6Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="m19 46 7-11 8 12-8-3-7 2Z" fill="currentColor"/>
-            <path d="M48 31V11m-7 7h14" stroke="currentColor" stroke-width="3"/>
-            <path d="M40 39c-2-9 0-15 8-19 8 4 10 10 8 19l-8-4-8 4Z" fill="currentColor"/>
-            <path d="m44 39-3 10m11-10 3 10" stroke="currentColor" stroke-width="2.5"/>
+            <path d="m7 66 21-31 13 18 10-11 22 24H7Zm14-20 7 4 7-4M51 13v21m-8-13h16"/>
           </svg>
-          <h2>Pope Leo XIV tours South America</h2>
+          <h2>Pope Leo XIV<br>visits Peru</h2>
         </div>
-        <p class="caption">The Pope's visit draws viral moments.</p>
-        <p class="detail">Pope Leo XIV visits the Andes and Peru on his South American tour.</p>
+        <p class="caption">The pope visits the Andes on his South American tour.</p>
       </article>
     </section>
-    <footer><span>17 November 2026 · World edition</span><strong>make.fun</strong><span>The day, at a glance.</span></footer>
+    <footer>Six stories. One day. 17 November 2026.</footer>
   </main>
 </body>
 </html>
